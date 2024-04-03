@@ -1,0 +1,27 @@
+@()(implicit request: RequestHeader, messages: Messages)
+
+
+
+@request.flash.get("error").map { msg =>
+<div class="alert alert-warning border-2 d-flex align-items-center" role="alert">
+    <div class="bg-warning me-3 icon-item"><span class="fas fa-exclamation-circle text-white fs-3"></span></div>
+    <p class="mb-0 flex-1">@msg</p>
+    <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+}
+
+@request.flash.get("success").map { msg =>
+<div class="alert alert-warning border-2 d-flex align-items-center" role="alert">
+    <div class="bg-success me-3 icon-item"><span class="fas fa-exclamation-circle text-white fs-3"></span></div>
+    <p class="mb-0 flex-1">@msg</p>
+    <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+}
+
+@request.flash.get("info").map { msg =>
+<div class="alert alert-info border-2 d-flex align-items-center" role="alert">
+    <div class="bg-info me-3 icon-item"><span class="fas fa-info-circle text-white fs-3"></span></div>
+    <p class="mb-0 flex-1">@msg</p>
+    <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+}

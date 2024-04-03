@@ -1,0 +1,62 @@
+@import play.api.i18n.Messages
+@import play.api.mvc.RequestHeader
+@import controllers.AssetsFinder
+@import play.api.data._
+@import forms.TotpSetupForm.Data
+@import com.mohiva.play.silhouette.impl.providers.GoogleTotpCredentials
+@import com.mohiva.play.silhouette.impl.providers.GoogleTotpInfo
+
+@this()(implicit assets: AssetsFinder)
+@(user: Option[models.User])(implicit request: RequestHeader, messages: Messages)
+
+
+
+@home(messages("home.title"), user) {
+
+<div class="card">
+
+
+
+    <div class="starter-template row">
+        @request.flash.get("error").map { msg =>
+        <div class="col-md-6 col-md-offset-3 alert alert-danger">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong>@messages("error")</strong> @msg
+        </div>
+        }
+        @request.flash.get("info").map { msg =>
+        <div class="col-md-6 col-md-offset-3 alert alert-info">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong>@messages("info")</strong> @msg
+        </div>
+        }
+        @request.flash.get("success").map { msg =>
+        <div class="col-md-6 col-md-offset-3 alert alert-success">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong>@messages("success")</strong> @msg
+        </div>
+        }
+    </div>
+
+
+
+    <div class="card-body overflow-hidden p-lg-6">
+        <div class="row align-items-center">
+            <div class="col ps-lg-4 my-5 text-center text-lg-start">
+
+                <a href="@controllers.routes.WalletController.mintAsset" >create asset</a>
+
+
+                <p id="demo"></p>
+                <p id="demo2"></p>
+                <li id="demo3_addressList"></li>
+                <li id="demo4_utxoList"></li>
+                <p id="demo5_signed_txn"></p>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+}

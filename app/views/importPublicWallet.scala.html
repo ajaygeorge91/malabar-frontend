@@ -1,0 +1,59 @@
+@import play.api.i18n.Messages
+@import play.api.mvc.RequestHeader
+@import controllers.AssetsFinder
+@import play.api.data._
+@import forms.ImportWalletForm.Data
+
+@this()(implicit assets: AssetsFinder)
+@(user: models.User, importPublicWalletForm: Form[Data])(implicit request: RequestHeader, messages: Messages)
+
+@home(messages("home.title"), Some(user)) {
+
+
+<div class="row mb-2 g-3">
+    <div class="col-md-12 col-lg-9">
+        <div class="card mb-3">
+            <div class="card-body">
+                <div class="row">
+                    @helper.form(action = controllers.routes.WalletController.addPublicWallet) {
+                    @helper.CSRF.formField
+                    <div class="mb-3">
+                        <label class="form-label" for="card-name">Name</label>
+                        @for(error <- importPublicWalletForm("name").errors) {
+                        <span class="badge badge-soft-warning">@error.format(messages)</span>
+                        }
+                        <input class="form-control" id="card-name" name="name" type="text" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label" for="card-public-key">Public key</label>
+                        @for(error <- importPublicWalletForm("publicKey").errors) {
+                        <span class="badge badge-soft-warning">@error.format(messages)</span>
+                        }
+                        <input class="form-control" id="card-public-key" name="publicKey" type="text" />
+
+                    </div>
+                    <div class="mb-3">
+                        <button class="btn btn-primary d-block w-100 mt-3" type="submit" name="submit">Add</button>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<footer class="footer">
+    <div class="row g-0 justify-content-between fs--1 mt-4 mb-3">
+        <div class="col-12 col-sm-auto text-center">
+            <p class="mb-0 text-600">Thank you for creating with Falcon <span class="d-none d-sm-inline-block">| </span><br class="d-sm-none" /> 2022 &copy; <a href="https://themewagon.com">Themewagon</a></p>
+        </div>
+        <div class="col-12 col-sm-auto text-center">
+            <p class="mb-0 text-600">v3.7.0</p>
+        </div>
+    </div>
+</footer>
+
+}

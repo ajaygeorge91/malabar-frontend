@@ -1,0 +1,181 @@
+@import play.api.i18n.Messages
+@import play.api.mvc.RequestHeader
+@import controllers.AssetsFinder
+@import play.api.data._
+
+@this()(implicit assets: AssetsFinder)
+@(user: models.User, publicWalletSummary:models.WalletSummary, transactions:Seq[models.GetWalletTransactionsResponse])(implicit request: RequestHeader, messages: Messages)
+
+@home(messages("home.title"), Some(user)) {
+
+
+<div class="row mb-2 g-3">
+    <div class="col-md-12 col-lg-9">
+        <div class="card mb-3">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-4 border-lg-end border-bottom border-lg-0 pb-3 pb-lg-0">
+                        <div class="d-flex flex-between-center mb-3">
+                            <div class="d-flex align-items-center">
+                                <div class="icon-item icon-item-sm bg-soft-primary shadow-none me-2 bg-soft-primary"><span class="fs--2 fas fa-money-bill text-primary"></span></div>
+                                <h6 class="mb-0">Available</h6>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <div class="d-flex">
+                                <p class="font-sans-serif lh-1 mb-1 fs-4 pe-2">₳ @utils.Utils.lovelaceToAda(publicWalletSummary.cardanoWalletAccountDetails.balance.available.quantity)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 border-lg-end border-bottom border-lg-0 py-3 py-lg-0">
+                        <div class="d-flex flex-between-center mb-3">
+                            <div class="d-flex align-items-center">
+                                <div class="icon-item icon-item-sm bg-soft-primary shadow-none me-2 bg-soft-info"><span class="fs--2 fas fa-money-check text-info"></span></div>
+                                <h6 class="mb-0">Reward</h6>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <div class="d-flex">
+                                <p class="font-sans-serif lh-1 mb-1 fs-4 pe-2">₳ @utils.Utils.lovelaceToAda(publicWalletSummary.cardanoWalletAccountDetails.balance.reward.quantity)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 pt-3 pt-lg-0">
+                        <div class="d-flex flex-between-center mb-3">
+                            <div class="d-flex align-items-center">
+                                <div class="icon-item icon-item-sm bg-soft-primary shadow-none me-2 bg-soft-success"><span class="fs--2 fas fa-money-bill text-success"></span></div>
+                                <h6 class="mb-0">Total</h6>
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <div class="d-flex">
+                                <p class="font-sans-serif lh-1 mb-1 fs-4 pe-2">₳ @utils.Utils.lovelaceToAda(publicWalletSummary.cardanoWalletAccountDetails.balance.total.quantity)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-lg-3">
+        <div class="card mb-3">
+            <div class="card-body">
+                <div class="d-flex flex-between-center mb-3">
+                    <div class="d-flex align-items-center">
+                        <div class="icon-item icon-item-sm bg-soft-primary shadow-none me-2 bg-soft-success"><span class="fs--2 fas fa-money-bill text-success"></span></div>
+                        <h6 class="mb-0">Delegation</h6>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <div class="d-flex">
+                        <p class="">@publicWalletSummary.cardanoWalletAccountDetails.delegation</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="card mb-3">
+    <div class="card-header">
+        <div class="row flex-between-end">
+            <div class="col-auto align-self-center">
+                <h5 class="mb-0" data-anchor="data-anchor">Assets</h5>
+            </div>
+        </div>
+    </div>
+    <div class="card-body bg-light">
+        <div class="d-flex p-0 flex-wrap align-content-start">
+            <div class="card overflow-hidden m-1" style="width: 20rem;">
+                <div class="card-img-top"><img class="img-fluid" src="../../assets/img/generic/3.jpg" alt="Card image cap" /></div>
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Cras justo odio</li>
+                    <li class="list-group-item">Dapibus ac facilisis in</li>
+                    <li class="list-group-item">Vestibulum at eros</li>
+                </ul>
+                <div class="card-body"><a class="card-link" href="#!">Card link</a><a class="card-link" href="#!">Another link</a></div>
+            </div>
+            <div class="card overflow-hidden m-1" style="width: 20rem;">
+                <div class="card-img-top"><img class="img-fluid" src="../../assets/img/generic/3.jpg" alt="Card image cap" /></div>
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Cras justo odio</li>
+                    <li class="list-group-item">Dapibus ac facilisis in</li>
+                    <li class="list-group-item">Vestibulum at eros</li>
+                </ul>
+                <div class="card-body"><a class="card-link" href="#!">Card link</a><a class="card-link" href="#!">Another link</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+            @partials._walletSummary(publicWalletSummary, readOnly=true)
+
+<div class="row">
+    <div class="col">
+        <div class="card overflow-hidden">
+            <div class="card-header d-flex flex-between-center bg-light py-2">
+                <h6 class="mb-0">Transaction Summary</h6>
+            </div>
+            <div class="card-body py-0">
+                <div class="table-responsive scrollbar">
+                    <table class="table table-dashboard mb-0 fs--1">
+                        @transactions.map { t =>
+                            @partials._transactionItem(t)
+                        }
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer bg-light py-2">
+                <div class="row flex-between-center">
+                    <div class="col-auto">
+                    </div>
+                    <div class="col-auto"><a class="btn btn-link btn-sm px-0 fw-medium" href="#!">View All<span class="fas fa-chevron-right ms-1 fs--2"></span></a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    @transactions.map { t =>
+        id : @t.id <br/>
+        amount : @t.amount <br/>
+        fee : @t.fee <br/>
+        deposit : @t.deposit <br/>
+        direction : @t.direction <br/>
+        inputs : @t.inputs <br/>
+        outputs : @t.outputs <br/>
+        withdrawals : @t.withdrawals <br/>
+        mint : @t.mint <br/>
+        status : @t.status <br/>
+        inserted_at : @t.inserted_at <br/>
+        expires_at : @t.expires_at <br/>
+        pending_since : @t.pending_since <br/>
+        depth : @t.depth <br/>
+        collateral : @t.collateral <br/>
+        metadata : @t.metadata <br/>
+        script_validity : @t.script_validity <br/>
+        <hr/>
+    }
+</div>
+<footer class="footer">
+    <div class="row g-0 justify-content-between fs--1 mt-4 mb-3">
+        <div class="col-12 col-sm-auto text-center">
+            <p class="mb-0 text-600">Thank you for creating with Falcon <span class="d-none d-sm-inline-block">| </span><br class="d-sm-none" /> 2022 &copy; <a href="https://themewagon.com">Themewagon</a></p>
+        </div>
+        <div class="col-12 col-sm-auto text-center">
+            <p class="mb-0 text-600">v3.7.0</p>
+        </div>
+    </div>
+</footer>
+
+}

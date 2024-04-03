@@ -1,0 +1,31 @@
+@(t: models.GetWalletTransactionsResponse)(implicit request: RequestHeader, messages: Messages, assets: AssetsFinder)
+
+
+
+<tr>
+    <td class="align-middle ps-0 text-nowrap">
+        <div class="d-flex position-relative align-items-center">
+            @if(t.direction.equalsIgnoreCase("incoming")) {
+                <div class="icon-item icon-item-sm bg-soft-success shadow-none me-2 bg-soft-success"><span class="fs--2 fas fa-arrow-down text-success"></span></div>
+            } else {
+                <div class="icon-item icon-item-sm bg-soft-warning shadow-none me-2 bg-soft-warning"><span class="fs--2 fas fa-arrow-up text-warning"></span></div>
+            }
+            <div class="flex-1">
+                <div class="d-flex p-0 flex-wrap align-content-start">
+                    <span class="badge fs--1 p-1 mt-1 me-1 bg-light text-dark">@utils.Utils.lovelaceToAda(t.amount.quantity) ADA</span>
+                    @t.outputs.map { o =>
+                        @o.assets.map { a =>
+                            <span class="badge fs--1 p-1 mt-1 me-1 bg-info">@utils.Utils.hexToString(a.asset_name)</span>
+                        }
+                    }
+                </div>
+                <a class="" href="#!">
+                    <p class="fs--2 mb-0">@t.id</p>
+                </a>
+            </div>
+        </div>
+    </td>
+    <td class="align-middle px-4 text-end text-nowrap" style="width:1%;">
+        <p class="fs--2 mb-0">@t.inserted_at.time</p>
+    </td>
+</tr>

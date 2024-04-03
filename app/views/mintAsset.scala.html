@@ -1,0 +1,256 @@
+@import play.api.i18n.Messages
+@import play.api.mvc.RequestHeader
+@import controllers.AssetsFinder
+@import play.api.data._
+@import forms.CreateAssetForm
+@import forms.SubmitCreateAssetForm
+
+@this()(implicit assets: AssetsFinder)
+@(user: models.User, createAssetForm: Form[CreateAssetForm.Data], submitCreateAssetForm: Form[SubmitCreateAssetForm.Data])(implicit request: RequestHeader, messages: Messages)
+
+
+
+@home(messages("home.title"), Some(user)) {
+
+
+
+<button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Launch static backdrop modal</button>
+<div class="modal fade" id="staticBackdrop" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg mt-6" role="document">
+
+        <div>
+            <div class="modal-content border-0">
+                <div class="position-absolute top-0 end-0 mt-3 me-3 z-index-1">
+                    <button class="btn-close btn btn-sm btn-circle d-flex flex-center transition-base" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-0">
+                    <div class="bg-light rounded-top-lg py-3 ps-4 pe-6">
+                        <h4 class="mb-1" id="staticBackdropLabel">Select wallet</h4>
+                    </div>
+                    <div class="p-4">
+                        <div class="row">
+                            <div class="col">
+                                <div class="card overflow-hidden">
+                                    <div class="card-body py-0">
+                                        <div class="table-responsive scrollbar">
+                                            <table class="table table-dashboard mb-0 fs--1">
+                                                <tr id="ccvault_space">
+                                                    <td class="align-middle ps-0 text-nowrap">
+                                                        <div class="d-flex position-relative align-items-center">
+                                                            <img class="d-flex align-self-center me-2" src="https://ccvault.io/images/favicon-128x128.png" alt="" width="30" height="30"/>
+                                                            <div class="flex-1">
+                                                                <a class="stretched-link" href="https://ccvault.io/app/mainnet/welcome" target="_blank">
+                                                                    <h6 class="mb-0">ccvault</h6>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td style="width:1%;"></td>
+                                                    <td style="width:1%;"></td>
+                                                </tr>
+                                                <tr id="nami_space">
+                                                    <td class="align-middle ps-0 text-nowrap">
+                                                        <div class="d-flex position-relative align-items-center">
+                                                            <img class="d-flex align-self-center me-2" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0ODYuMTcgNDk5Ljg2Ij48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6IzM0OWVhMzt9PC9zdHlsZT48L2RlZnM+PGcgaWQ9IkxheWVyXzIiIGRhdGEtbmFtZT0iTGF5ZXIgMiI+PGcgaWQ9IkxheWVyXzEtMiIgZGF0YS1uYW1lPSJMYXllciAxIj48cGF0aCBpZD0icGF0aDE2IiBjbGFzcz0iY2xzLTEiIGQ9Ik03My44Nyw1Mi4xNSw2Mi4xMSw0MC4wN0EyMy45MywyMy45MywwLDAsMSw0MS45LDYxLjg3TDU0LDczLjA5LDQ4Ni4xNyw0NzZaTTEwMi40LDE2OC45M1Y0MDkuNDdhMjMuNzYsMjMuNzYsMCwwLDEsMzIuMTMtMi4xNFYyNDUuOTRMMzk1LDQ5OS44Nmg0NC44N1ptMzAzLjM2LTU1LjU4YTIzLjg0LDIzLjg0LDAsMCwxLTE2LjY0LTYuNjh2MTYyLjhMMTMzLjQ2LDE1LjU3SDg0TDQyMS4yOCwzNDUuNzlWMTA3LjZBMjMuNzIsMjMuNzIsMCwwLDEsNDA1Ljc2LDExMy4zNVoiLz48cGF0aCBpZD0icGF0aDE4IiBjbGFzcz0iY2xzLTEiIGQ9Ik0zOC4yNywwQTM4LjI1LDM4LjI1LDAsMSwwLDc2LjQ5LDM4LjI3djBBMzguMjgsMzguMjgsMCwwLDAsMzguMjcsMFpNNDEuOSw2MS44YTIyLDIyLDAsMCwxLTMuNjMuMjhBMjMuOTQsMjMuOTQsMCwxLDEsNjIuMTgsMzguMTNWNDBBMjMuOTQsMjMuOTQsMCwwLDEsNDEuOSw2MS44WiIvPjxwYXRoIGlkPSJwYXRoMjAiIGNsYXNzPSJjbHMtMSIgZD0iTTQwNS43Niw1MS4yYTM4LjI0LDM4LjI0LDAsMCwwLDAsNzYuNDYsMzcuNTcsMzcuNTcsMCwwLDAsMTUuNTItMy4zQTM4LjIyLDM4LjIyLDAsMCwwLDQwNS43Niw1MS4yWm0xNS41Miw1Ni40YTIzLjkxLDIzLjkxLDAsMSwxLDguMzktMTguMThBMjMuOTEsMjMuOTEsMCwwLDEsNDIxLjI4LDEwNy42WiIvPjxwYXRoIGlkPSJwYXRoMjIiIGNsYXNzPSJjbHMtMSIgZD0iTTEzNC41OCwzOTAuODFBMzguMjUsMzguMjUsMCwxLDAsMTU3LjkyLDQyNmEzOC4yNCwzOC4yNCwwLDAsMC0yMy4zNC0zNS4yMlptLTE1LDU5LjEzQTIzLjkxLDIzLjkxLDAsMSwxLDE0My41NCw0MjZhMjMuOSwyMy45LDAsMCwxLTIzLjk0LDIzLjkxWiIvPjwvZz48L2c+PC9zdmc+" alt="" width="30" height="30"/>
+                                                            <div class="flex-1">
+                                                                <a class="stretched-link" href="https://namiwallet.io/" target="_blank">
+                                                                    <h6 class="mb-0">nami</h6>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td style="width:1%;"></td>
+                                                    <td style="width:1%;"></td>
+                                                </tr>
+                                                <tr id="yoroi_space">
+                                                    <td class="align-middle ps-0 text-nowrap">
+                                                        <div class="d-flex position-relative align-items-center">
+                                                            <img class="d-flex align-self-center me-2" src="" alt="" width="30" height="30"/>
+                                                            <div class="flex-1">
+                                                                <a class="stretched-link" href="https://yoroi-wallet.com/" target="_blank">
+                                                                    <h6 class="mb-0">yoroi</h6>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td style="width:1%;"></td>
+                                                    <td style="width:1%;"></td>
+                                                </tr>
+                                                <tr id="malabar_space">
+                                                    <td class="align-middle ps-0 text-nowrap">
+                                                        <div class="d-flex position-relative align-items-center">
+                                                            <img class="d-flex align-self-center me-2" src="" alt="" width="30" height="30"/>
+                                                            <div class="flex-1">
+                                                                <a class="stretched-link" href="https://malabar.online/" target="_blank">
+                                                                    <h6 class="mb-0">malabar</h6>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td style="width:1%;"></td>
+                                                    <td style="width:1%;"></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card mt-2">
+
+
+
+    <div class="starter-template row">
+        @request.flash.get("error").map { msg =>
+        <div class="col-md-6 col-md-offset-3 alert alert-danger">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong>@messages("error")</strong> @msg
+        </div>
+        }
+        @request.flash.get("info").map { msg =>
+        <div class="col-md-6 col-md-offset-3 alert alert-info">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong>@messages("info")</strong> @msg
+        </div>
+        }
+        @request.flash.get("success").map { msg =>
+        <div class="col-md-6 col-md-offset-3 alert alert-success">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong>@messages("success")</strong> @msg
+        </div>
+        }
+    </div>
+
+
+
+    <div class="card-body overflow-hidden p-2">
+        <div class="row align-items-center">
+            <div class="col ps-lg-4 my-1 text-center text-lg-start">
+
+                <ul id="demo3_addressList"></ul>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="card mt-2">
+    <div class="card-body overflow-hidden p-2">
+        <div class="row align-items-center">
+            <div class="col ps-lg-4 my-1 text-center text-lg-start">
+
+                <div class="col d-flex flex-center">
+                    <div class="p-4 p-md flex-grow-1">
+
+                        <div class="row flex-between-center">
+                            <div class="col-auto">
+                                <h3>Create Asset</h3>
+                            </div>
+                        </div>
+                        @helper.form(action = controllers.routes.WalletController.mintAsset1) {
+                        @helper.CSRF.formField
+                        <div class="mb-3">
+                            <label class="form-label" for="card-name">Name</label>
+                            @for(error <- createAssetForm("name").errors) {
+                            <span class="badge badge-soft-warning">@error.format(messages)</span>
+                            }
+                            <input class="form-control" id="card-name" name="name" type="text" value='@createAssetForm("name").value' />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="card-image">Image IPFS</label>
+                            @for(error <- createAssetForm("image").errors) {
+                            <span class="badge badge-soft-warning">@error.format(messages)</span>
+                            }
+                            <input class="form-control" id="card-image" name="image" type="text" value='@createAssetForm("image").value' />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="card-description">Description</label>
+                            @for(error <- createAssetForm("description").errors) {
+                            <span class="badge badge-soft-warning">@error.format(messages)</span>
+                            }
+                            <input class="form-control" id="card-description" name="description" type="text" value='@createAssetForm("description").value' />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="card-author">Author</label>
+                            @for(error <- createAssetForm("author").errors) {
+                            <span class="badge badge-soft-warning">@error.format(messages)</span>
+                            }
+                            <input class="form-control" id="card-author" name="author" type="text" value='@createAssetForm("author").value' />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="card-addresses">Addresses</label>
+                            @for(error <- createAssetForm("addresses").errors) {
+                            <span class="badge badge-soft-warning">@error.format(messages)</span>
+                            }
+                            <input class="form-control" id="card-addresses" name="addresses" type="text" value='@createAssetForm("addresses").value' />
+                        </div>
+
+                        <div class="mb-3">
+                            <button class="btn btn-primary d-block w-100 mt-3" type="submit" name="submit">Next</button>
+                        </div>
+                        }
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card mt-2">
+    <div class="card-body overflow-hidden p-2">
+        <div class="row align-items-center">
+            <div class="col ps-lg-4 my-1 text-center text-lg-start">
+
+                <div class="col d-flex flex-center">
+                    <div class="p-4 p-md flex-grow-1">
+
+                        <div class="row flex-between-center">
+                            <div class="col-auto">
+                                <h3>Submit txn</h3>
+                            </div>
+                        </div>
+                        @helper.form(action = controllers.routes.WalletController.mintAssetSubmit1) {
+                        @helper.CSRF.formField
+
+                        <div class="mb-3">
+                            <label class="form-label" for="card-transactionToSign">transactionToSign</label>
+                            @for(error <- submitCreateAssetForm("transactionToSign").errors) {
+                            <span class="badge badge-soft-warning">@error.format(messages)</span>
+                            }
+                            <input class="form-control" id="card-transactionToSign" name="transactionToSign" type="text" value='@submitCreateAssetForm("transactionToSign").value' />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="card-witnessSet">witnessSet</label>
+                            @for(error <- submitCreateAssetForm("witnessSet").errors) {
+                            <span class="badge badge-soft-warning">@error.format(messages)</span>
+                            }
+                            <input class="form-control" id="card-witnessSet" name="witnessSet" type="text" value='@submitCreateAssetForm("witnessSet").value' />
+                        </div>
+
+                        <div class="mb-3">
+                            <button class="btn btn-primary d-block w-100 mt-3" type="submit" name="submit">Submit</button>
+                        </div>
+                        }
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+}

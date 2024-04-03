@@ -1,0 +1,55 @@
+@import play.api.i18n.Messages
+@import play.api.mvc.RequestHeader
+@import play.twirl.api.Html
+@import controllers.AssetsFinder
+@import views.html.helper._
+
+@(title:String, user: Option[models.User])(content: Html)(implicit request: RequestHeader, messages: Messages, assets: AssetsFinder)
+
+
+
+@main(messages("home.title"), user) {
+
+
+<!-- ===============================================-->
+<!--    Main Content-->
+<!-- ===============================================-->
+<main class="main" id="top">
+    <div class="container" data-layout="container">
+        <script>
+              var isFluid = JSON.parse(localStorage.getItem('isFluid'));
+              if (isFluid) {
+                var container = document.querySelector('[data-layout]');
+                container.classList.remove('container');
+                container.classList.add('container-fluid');
+              }
+            </script>
+
+        @partials._sideNavbar(user)
+
+        <div class="content">
+            @partials._topNavbar(user)
+
+            @partials._requestFlash()
+
+            @content
+            <footer class="footer">
+                <div class="row g-0 justify-content-between fs--1 mt-4 mb-3">
+                    <div class="col-12 col-sm-auto text-center">
+                        <p class="mb-0 text-600">Thank you for creating with Falcon <span class="d-none d-sm-inline-block">| </span><br class="d-sm-none" /> 2022 &copy; <a href="https://themewagon.com">Themewagon</a></p>
+                    </div>
+                    <div class="col-12 col-sm-auto text-center">
+                        <p class="mb-0 text-600">v3.7.0</p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+</main>
+<!-- ===============================================-->
+<!--    End of Main Content-->
+<!-- ===============================================-->
+
+@partials._templates()
+
+}

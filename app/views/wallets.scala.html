@@ -1,0 +1,45 @@
+@import play.api.i18n.Messages
+@import play.api.mvc.RequestHeader
+@import controllers.AssetsFinder
+@import play.api.data._
+
+@this()(implicit assets: AssetsFinder)
+@(user: models.User, publicWallets:Seq[models.UserPublicWallet], privateWallets:Seq[models.UserPrivateWallet])(implicit request: RequestHeader, messages: Messages)
+
+@home(messages("home.title"), Some(user)) {
+
+    <div class="d-flex mb-4 mt-2"><span class="fa-stack me-2 ms-n1"><i class="fas fa-circle fa-stack-2x text-300"></i><i class="fa-inverse fa-stack-1x text-primary fas fa-lock-open" data-fa-transform="shrink-4"></i></span>
+        <div class="col">
+            <h5 class="mb-0 text-primary position-relative"><span class="bg-200 dark__bg-1100 pe-3">Managed wallets</span><span class="border position-absolute top-50 translate-middle-y w-100 start-0 z-index--1"></span></h5>
+            <p class="mb-0"><small>These wallets contain private-key info. Please do not keep large sums of ADA or valuable tokens in these wallets</small></p>
+        </div>
+    </div>
+    @privateWallets.map { w =>
+        @w.walletSummery.map { wd =>
+            @partials._walletSummary(wd, readOnly=false)
+        }
+    }
+    <div>
+        <a class="btn btn-outline-primary mb-2" type="button">
+            <span class="fas fa-plus me-1" data-fa-transform="shrink-3"></span>Create
+        </a>
+    </div>
+    <div class="d-flex mb-4 mt-4"><span class="fa-stack me-2 ms-n1"><i class="fas fa-circle fa-stack-2x text-300"></i><i class="fa-inverse fa-stack-1x text-primary fas fa-lock" data-fa-transform="shrink-4"></i></span>
+        <div class="col">
+            <h5 class="mb-0 text-primary position-relative"><span class="bg-200 dark__bg-1100 pe-3">Read-only wallets</span><span class="border position-absolute top-50 translate-middle-y w-100 start-0 z-index--1"></span></h5>
+            <p class="mb-0"><small>You can view publicly available details on blockchain for these wallets. Since there is no private key information, you cannot manage assets</small></p>
+        </div>
+    </div>
+
+    @publicWallets.map { w =>
+        @w.walletSummery.map { wd =>
+            @partials._walletSummary(wd, readOnly=true)
+        }
+    }
+    <div>
+        <a class="btn btn-outline-primary mb-2" type="button" href="@controllers.routes.WalletController.addPublicWalletPage">
+            <span class="fas fa-plus me-1" data-fa-transform="shrink-3"></span>Add
+        </a>
+    </div>
+
+}
